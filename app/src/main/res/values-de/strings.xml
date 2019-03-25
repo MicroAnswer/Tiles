@@ -42,6 +42,7 @@
         <item>PINK</item>
         <item>HERBST</item>
         <item>WINTER WUNDERLAND</item>
+        <item>PHOTO</item>
     </string-array>
     <string-array name="colors_intern">
         <item>RED</item>
@@ -51,6 +52,7 @@
         <item>PINK</item>
         <item>AUTUMN</item>
         <item>WINTER WONDERLAND</item>
+        <item>PHOTO</item>
     </string-array>
     <string name="notification">Lust auf eine Veränderung? :)</string>
     <string name="menuImp">Impressum</string>
