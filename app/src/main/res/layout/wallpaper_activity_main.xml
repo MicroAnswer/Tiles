@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="pit.opengles.WallpaperMainActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
         android:id="@+id/scrollView"
         style="@android:style/Widget.Material.ScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/adView"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:clipToPadding="false"
@@ -23,71 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:minHeight="100dp"
             android:orientation="vertical">
-
-            <RadioGroup
-                android:id="@+id/motionGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:checkedButton="@+id/straight"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/surfaceHolder">
-
-                <RadioButton
-                    android:id="@+id/straight"
-                    style="@android:style/Widget.Material.Light.CompoundButton.RadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="@string/straight"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textDark"
-                    android:textColorLink="@color/colorAccent"
-                    android:textSize="18sp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="232dp" />
-
-                <RadioButton
-                    android:id="@+id/eight"
-                    style="@android:style/Widget.Material.Light.CompoundButton.RadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="@string/eight"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textDark"
-                    android:textColorLink="@color/colorAccent"
-                    android:textSize="18sp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="232dp" />
-
-                <RadioButton
-                    android:id="@+id/random"
-                    style="@android:style/Widget.Material.Light.CompoundButton.RadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="@string/rand"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textDark"
-                    android:textColorLink="@color/colorAccent"
-                    android:textSize="18sp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="232dp" />
-
-            </RadioGroup>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/surfaceHolder"
@@ -112,64 +52,16 @@
                     android:layout_marginBottom="4dp" />
             </android.support.v7.widget.CardView>
 
-            <Button
-                android:id="@+id/buttonSetWallpaper"
-                style="@android:style/Widget.Material.Button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/my_button"
-                android:text="@string/set"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parallaxToggle" />
-
-            <SeekBar
-                android:id="@+id/animationSpeedSlider"
-                style="@android:style/Widget.Material.SeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="50"
-                android:progressTint="@color/colorPrimaryDark"
-                android:secondaryProgressTint="@color/colorPrimaryDark"
-                android:thumbTint="@color/colorAccent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/animSpeed"
-                android:textAlignment="center"
-                android:textColor="@color/textDark"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cd_box" />
-
             <android.support.v7.widget.CardView
                 android:id="@+id/cd_box"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:alpha="20"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/motionGroup">
+                app:cardCornerRadius="10dp">
 
                 <ImageView
                     android:id="@+id/dropdownimage"
@@ -215,32 +107,31 @@
                 android:id="@+id/parallaxToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/parallax"
                 android:textColor="@color/textDark"
                 android:textSize="18sp"
                 android:theme="@style/SwitchTheme"
+                app:switchPadding="16dp" />
+            <Button
+                android:id="@+id/buttonSetWallpaper"
+                style="@android:style/Widget.Material.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/my_button"
+                android:text="@string/set"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/animationSpeedSlider"
-                app:switchPadding="16dp" />
-
-        </android.support.constraint.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/parallaxToggle" />
+        </LinearLayout>
     </ScrollView>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@android:color/background_dark"
-        app:adSize="SMART_BANNER"
-        app:adUnitId="@string/ad_mob_banner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </RelativeLayout>

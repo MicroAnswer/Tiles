@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="pit.opengles">
-    <uses-feature   android:glEsVersion="0x20000"
-        android:required="true" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" package="pit.opengles">
+
+    <uses-feature android:glEsVersion="0x20000" android:required="true" />
     <uses-feature android:name="android.software.live_wallpaper" />
 
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
@@ -12,31 +13,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/tlw_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6496680407589387~2702520004"/>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <!--<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-6496680407589387~2702520004"/>-->
 
-        <activity android:name=".WallpaperMainActivity"
-            android:exported="true">
+        <activity android:name=".WallpaperMainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImpressumActivity">
-        </activity>
+
+        <activity android:name=".ImpressumActivity"/>
+
         <service android:name="pit.livewallpaper.ColloredWallpaperService"
             android:label="@string/short_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/wallpaper"/>
+            <meta-data android:name="android.service.wallpaper" android:resource="@xml/wallpaper"/>
         </service>
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>-->
     </application>
 
 </manifest>
