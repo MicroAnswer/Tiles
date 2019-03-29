@@ -25,10 +25,10 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
     private FloatBuffer _mTexCoordBuffer;
     private float _mAnimationSpeed = 0.5f;
     private Camera _mCamera;
-    private Vector3f _mLightPosition = new Vector3f(0, 0, -0.9f);
+    private Vector3f _mLightPosition = new Vector3f(0, 0, -.75f);
     private Vector3f _mPlanePosition = new Vector3f(0, 0, 0);
-    private Transform _mLightTransform = new Transform(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z, 1, 1, 1, 0.1f,0.1f ,0.1f ,0);
-    private Transform _mPlaneTransform = new Transform(_mPlanePosition.x, _mPlanePosition.y, _mPlanePosition.z, 1, 1, 1,1.25f, 1.25f,1 ,0);
+    private Transform _mLightTransform = new Transform(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z, 1, 1, 1, 1f,1f ,0.4f ,0);
+    private Transform _mPlaneTransform = new Transform(_mPlanePosition.x, _mPlanePosition.y, _mPlanePosition.z, 1, 1, 1,1.05f, 1.05f,1 ,0);
     private final int sizeOfFloat = 4;
     private int _mAutumn = 0;
     private int _mPink = 0;
@@ -61,6 +61,8 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
 
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glEnable(GLES20.GL_CULL_FACE);
+
+        // 将背景设置为黑色
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         createVisuals();
@@ -224,8 +226,8 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
             }
         }
 
-        _mOffset.x += (x * (0.001f));
-        _mOffset.y -= (y * (0.001f));
+        _mOffset.x += (x * (0.0005f));
+        _mOffset.y -= (y * (0.0005f));
         _mOffset.x = clampf(_mOffset.x, -MAX_OFFSET, MAX_OFFSET);
         _mOffset.y = clampf(_mOffset.y, -MAX_OFFSET, MAX_OFFSET);
     }

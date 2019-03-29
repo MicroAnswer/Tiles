@@ -25,17 +25,20 @@ public class Shader
         int vs = Create(vsSrc, GLES20.GL_VERTEX_SHADER);
         int fs = Create(fsSrc, GLES20.GL_FRAGMENT_SHADER);
 
+        // 创建一个空的OpenGLES程序
         int program = GLES20.glCreateProgram();
 
 
         if (program != 0)
-
+            // 将顶点着色器加入到程序
             GLES20.glAttachShader(program, vs);
+            // 将片元着色器加入到程序中
             GLES20.glAttachShader(program, fs);
 
             GLES20.glBindAttribLocation(program, 0, "position");
             GLES20.glBindAttribLocation(program, 1, "texCoords");
 
+           // 连接到着色器程序
             GLES20.glLinkProgram(program);
 
             final int[] linkStatus = new int[1];
