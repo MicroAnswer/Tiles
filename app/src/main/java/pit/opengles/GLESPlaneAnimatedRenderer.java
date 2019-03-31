@@ -217,8 +217,8 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
             }
         }
 
-        _mOffset.x += (x * (0.0005f));
-        _mOffset.y -= (y * (0.0005f));
+        _mOffset.x += (x * (0.0002f));
+        _mOffset.y -= (y * (0.0002f));
         _mOffset.x = clampf(_mOffset.x, -MAX_OFFSET, MAX_OFFSET);
         _mOffset.y = clampf(_mOffset.y, -MAX_OFFSET, MAX_OFFSET);
     }
