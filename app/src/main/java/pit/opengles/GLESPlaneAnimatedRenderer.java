@@ -27,8 +27,8 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
     private Camera _mCamera;
     private Vector3f _mLightPosition = new Vector3f(0, 0, -.75f);
     private Vector3f _mPlanePosition = new Vector3f(0, 0, 0);
-    private Transform _mLightTransform = new Transform(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z, 1, 1, 1, 1f,1f ,0.4f ,0);
-    private Transform _mPlaneTransform = new Transform(_mPlanePosition.x, _mPlanePosition.y, _mPlanePosition.z, 1, 1, 1,1.05f, 1.05f,1 ,0);
+    private Transform _mLightTransform = new Transform(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z, 1, 1, 1, 1f, 1f, 0.4f, 0);
+    private Transform _mPlaneTransform = new Transform(_mPlanePosition.x, _mPlanePosition.y, _mPlanePosition.z, 1, 1, 1, 1.05f, 1.05f, 1, 0);
     private final int sizeOfFloat = 4;
     private int _mAutumn = 0;
     private int _mPink = 0;
@@ -40,20 +40,18 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
     private int _mTexture = 0;
     private int _mMask = 0;
     private int _mBump = 0;
-    private boolean red = false, blue = false, green = false, colorful  = true, pink = false, autumn = false, winterwonderland = false;
+    private boolean red = false, blue = false, green = false, colorful = true, pink = false, autumn = false, winterwonderland = false;
     private boolean straight = true, eight = false, random = false;
     private Vector2f _mOffset = new Vector2f(0, 0);
 
     private Plane plane;
 
-    public GLESPlaneAnimatedRenderer(Context context)
-    {
+    public GLESPlaneAnimatedRenderer(Context context) {
         _mContext = context;
     }
 
     @Override
-    public void onSurfaceCreated(GL10 notUsed, EGLConfig config)
-    {
+    public void onSurfaceCreated(GL10 notUsed, EGLConfig config) {
         _mShader = new Shader(_mContext);
         _mCamera = new Camera();
         plane = new Plane();
@@ -68,8 +66,7 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
         createVisuals();
     }
 
-    private void createVisuals()
-    {
+    private void createVisuals() {
         //vertices
         float[] vertices = plane.vertices;
         _mVertexBuffer = floatToBuffer(vertices);
@@ -95,76 +92,74 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
         _mWinterWonderland = ResourceLoader.loadTexture(_mContext, R.drawable.winterwonderland);
         _mBump = ResourceLoader.loadTexture(_mContext, R.drawable.bump);
 
-        if(red)
+        if (red)
             _mTexture = _mRed;
-        else if(green)
+        else if (green)
             _mTexture = _mGreen;
-        else if(blue)
+        else if (blue)
             _mTexture = _mBlue;
-        else if(colorful)
+        else if (colorful)
             _mTexture = _mColorful;
-        else if(pink)
+        else if (pink)
             _mTexture = _mPink;
-        else if(autumn)
+        else if (autumn)
             _mTexture = _mAutumn;
-        else if(winterwonderland)
+        else if (winterwonderland)
             _mTexture = _mWinterWonderland;
     }
 
     @Override
-    public void onSurfaceChanged(GL10 notUsed, int width, int height)
-    {
+    public void onSurfaceChanged(GL10 notUsed, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
         _mCamera.onSurfaceChanged(width, height);
     }
 
+    public void positionReSet() {
+        _mOffset.x = 0;
+        _mOffset.y = 0;
+    }
+
     @Override
-    public void onDrawFrame(GL10 notUsed)
-    {
+    public void onDrawFrame(GL10 notUsed) {
         long time = SystemClock.uptimeMillis();
-        float currentTime = time/1000.0f;
+        float currentTime = time / 1000.0f;
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
 
-        if(straight) moveStraight(currentTime);
-        else if(eight) moveEight(currentTime);
-        else if(random) moveRandom();
+        if (straight) moveStraight(currentTime);
+        else if (eight) moveEight(currentTime);
+        else if (random) moveRandom();
 
         DrawModel();
     }
 
-    private void moveStraight(float t)
-    {
-        _mLightPosition.y = (float)Math.sin(t * _mAnimationSpeed) * 0.9f;
+    private void moveStraight(float t) {
+        _mLightPosition.y = (float) Math.sin(t * _mAnimationSpeed) * 0.9f;
         _mLightPosition.x = 0.0f;
         _mLightTransform.setPosition(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z);
     }
 
-    private void moveEight(float t)
-    {
-        _mLightPosition.y = (float)Math.sin(t * _mAnimationSpeed) * 0.9f;
-        _mLightPosition.x  = (float)Math.sin(t * _mAnimationSpeed * 2) * 0.4f;
+    private void moveEight(float t) {
+        _mLightPosition.y = (float) Math.sin(t * _mAnimationSpeed) * 0.9f;
+        _mLightPosition.x = (float) Math.sin(t * _mAnimationSpeed * 2) * 0.4f;
         _mLightTransform.setPosition(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z);
     }
 
-    private float x  = (float)Math.random() - 0.6f;
-    private float y = (float)Math.random() *1.8f - 0.9f;
+    private float x = (float) Math.random() - 0.6f;
+    private float y = (float) Math.random() * 1.8f - 0.9f;
 
-    private void moveRandom()
-    {
-        if(_mLightPosition.y < y) _mLightPosition.y += 0.01f * _mAnimationSpeed;
-        if(_mLightPosition.y > y) _mLightPosition.y -= 0.01f * _mAnimationSpeed;
-        if(_mLightPosition.x < x) _mLightPosition.x += 0.01f * _mAnimationSpeed;
-        if(_mLightPosition.x > x) _mLightPosition.x -= 0.01f * _mAnimationSpeed;
-        if(Math.abs(_mLightPosition.y - y) < 0.01f * _mAnimationSpeed && Math.abs(_mLightPosition.x - x) < 0.01f* _mAnimationSpeed)
-        {
-            x  = (float)Math.random() - 0.5f;
-            y = (float)Math.random() *2 - 1;
+    private void moveRandom() {
+        if (_mLightPosition.y < y) _mLightPosition.y += 0.01f * _mAnimationSpeed;
+        if (_mLightPosition.y > y) _mLightPosition.y -= 0.01f * _mAnimationSpeed;
+        if (_mLightPosition.x < x) _mLightPosition.x += 0.01f * _mAnimationSpeed;
+        if (_mLightPosition.x > x) _mLightPosition.x -= 0.01f * _mAnimationSpeed;
+        if (Math.abs(_mLightPosition.y - y) < 0.01f * _mAnimationSpeed && Math.abs(_mLightPosition.x - x) < 0.01f * _mAnimationSpeed) {
+            x = (float) Math.random() - 0.5f;
+            y = (float) Math.random() * 2 - 1;
         }
         _mLightTransform.setPosition(_mLightPosition.x, _mLightPosition.y, _mLightPosition.z);
     }
 
-    private void DrawModel()
-    {
+    private void DrawModel() {
         GLES20.glUseProgram(_mShader.getMainProgram());
 
         float[] MVPMatrix = new float[16];
@@ -197,11 +192,9 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
 
     private static float MAX_OFFSET = .1f;
 
-    public void parallaxMove(float x, float y, boolean reversed, boolean touch)
-    {
+    public void parallaxMove(float x, float y, boolean reversed, boolean touch) {
         if (_mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            if (!touch)
-            {
+            if (!touch) {
                 float temp;
                 if (reversed) {
                     temp = y;
@@ -211,9 +204,7 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
                     y = x;
                 }
                 x = temp;
-            }
-            else
-            {
+            } else {
                 float temp;
                 if (reversed) {
                     temp = y;
@@ -232,23 +223,19 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
         _mOffset.y = clampf(_mOffset.y, -MAX_OFFSET, MAX_OFFSET);
     }
 
-    private float clampf(float value, float min, float max)
-    {
+    private float clampf(float value, float min, float max) {
         return Math.min(Math.max(value, min), max);
     }
 
-    private FloatBuffer floatToBuffer(float[] array)
-    {
+    private FloatBuffer floatToBuffer(float[] array) {
         FloatBuffer fb = ByteBuffer.allocateDirect(array.length * sizeOfFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
         fb.put(array).position(0);
 
         return fb;
     }
 
-    public void switchColors(String newColor)
-    {
-        switch (newColor)
-        {
+    public void switchColors(String newColor) {
+        switch (newColor) {
             case "RED":
                 _mTexture = _mRed;
                 red = true;
@@ -262,7 +249,7 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
             case "GREEN":
                 _mTexture = _mGreen;
                 green = true;
-                red = blue= colorful = winterwonderland = pink = autumn = false;
+                red = blue = colorful = winterwonderland = pink = autumn = false;
                 break;
             case "COLORFUL":
                 _mTexture = _mColorful;
@@ -287,27 +274,20 @@ public class GLESPlaneAnimatedRenderer implements GLSurfaceView.Renderer {
         }
     }
 
-    public void changeAnimationSpeed(float newSpeed)
-    {
+    public void changeAnimationSpeed(float newSpeed) {
         _mAnimationSpeed = newSpeed;
     }
 
-    public void changeMotion(String motion)
-    {
-        if(motion.matches("straight"))
-        {
+    public void changeMotion(String motion) {
+        if (motion.matches("straight")) {
             straight = true;
             eight = false;
             random = false;
-        }
-        else if(motion.matches("8"))
-        {
+        } else if (motion.matches("8")) {
             straight = false;
             eight = true;
             random = false;
-        }
-        else if(motion.matches("random"))
-        {
+        } else if (motion.matches("random")) {
             straight = false;
             eight = false;
             random = true;

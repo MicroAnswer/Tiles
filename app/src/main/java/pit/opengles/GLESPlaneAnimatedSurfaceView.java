@@ -155,6 +155,7 @@ public class GLESPlaneAnimatedSurfaceView extends GLSurfaceView implements Senso
     public void onResume()
     {
         super.onResume();
+        _mRenderer.positionReSet();
         if(sensors)
         {
             mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
